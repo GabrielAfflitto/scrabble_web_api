@@ -12,16 +12,11 @@ class OxfordService
   def get_word
     response = @conn.get("inflections/en/#{word}")
     b = JSON.parse(response.body, symbolize_names: true)
-    binding.pry
+    if response.status == 200
+      "#{word} is a valid word and its root form is #{b[:results].first[:lexicalEntries].first[:inflectionOf].first[:text]}"
+    else
+      "that is ont a valid word"
+    end
   end
-
-  def validate_word
-
-  end
-
-  # def get_json(url)
-  #   response = @conn.get(url)
-  #   b = JSON.parse(response.body, symbolize_names: true)
-  # end
 
 end
