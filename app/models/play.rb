@@ -19,7 +19,5 @@ class Play < ApplicationRecord
       self.score = b.map do |letter|
         letter_scores[letter]
       end.sum
-
-      # binding.pry
     end
 end
