@@ -1,9 +1,14 @@
 class Api::V1::PlaysController < ApplicationController
 
   def create
-    # binding.pry
-    game = Game.find(params[:game_id])
-    render json: game.plays.create(play_params)
+    @game = Game.find(params[:game_id])
+    @play = @game.plays.create(play_params)
+
+    if @play.save
+      render json: @game.plays.last
+    else
+      {message: "word is not valid"}
+    end
   end
 
   private

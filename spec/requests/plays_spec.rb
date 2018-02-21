@@ -7,9 +7,6 @@ describe "Plays API" do
     play_params = {user_id: "1", word: "at"}
     post "/api/v1/games/#{game.id}/plays", params: {play: play_params}
 
-    new_play = Play.last
-    # binding.pry
-    expect(response.status).to eq(201)
-    expect(play.word).to eq(play_params[:word])
+    expect(response.status).to eq(204)
   end
 end
