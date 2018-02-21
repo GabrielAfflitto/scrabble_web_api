@@ -1,8 +1,7 @@
 class GameSerializer < ActiveModel::Serializer
   attributes :id, :scores
-  has_many :plays
 
   def scores
-    object.plays.select(:user_id, :score)
+    object.plays.select(:user_id, :score).as_json(:except => :id)
   end
 end

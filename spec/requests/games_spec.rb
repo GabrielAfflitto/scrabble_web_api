@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "Games API" do
-  xit "should send back games with scores" do
+  it "should send back games with scores" do
     create_list(:game, 2)
     get '/api/v1/games'
 
@@ -17,6 +17,7 @@ describe "Games API" do
 
     game = JSON.parse(response.body)
     expect(game["id"]).to eq(games.first.id)
+    expect(game["scores"].first).to_not include(plays.first.id)
     expect(game["scores"]).to be_a Array
   end
 end
