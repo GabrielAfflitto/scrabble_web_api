@@ -11,12 +11,12 @@ class OxfordService
 
   def get_word
     response = @conn.get("inflections/en/#{word}")
-      if response.body.include?("404")
-        "#{word} is not a valid word"
-      else
-        b = JSON.parse(response.body, symbolize_names: true)
-        "#{word} is a valid word and its root form is #{b[:results].first[:lexicalEntries].first[:inflectionOf].first[:text]}"
-      end
+    if response.body.include?("404")
+      "#{word} is not a valid word"
+    else
+      b = JSON.parse(response.body, symbolize_names: true)
+      "#{word} is a valid word and its root form is #{b[:results].first[:lexicalEntries].first[:inflectionOf].first[:text]}"
+    end
   end
 
 end
