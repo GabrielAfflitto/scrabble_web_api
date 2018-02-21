@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "user can validate a word" do
   context "when a user types a word into the text box" do
-    xit "should let them know if it's a valid word or not" do
+    it "should let them know if it's a valid word or not" do
       visit root_path
 
       fill_in :q, with: "foxes"
