@@ -19,4 +19,12 @@ class OxfordService
     end
   end
 
+  def is_valid?
+    if self.get_word.include?("404")
+      false
+    else
+      true
+    end
+  end
+
 end
