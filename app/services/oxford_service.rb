@@ -1,7 +1,6 @@
 class OxfordService
-  attr_reader :word, :conn
-  def initialize(word)
-    @word = word
+  attr_reader :conn
+  def initialize
     @conn = Faraday.new(url: "https://od-api.oxforddictionaries.com/api/v1") do |faraday|
       faraday.headers['app_id'] = ENV['app_id']
       faraday.headers['app_key'] = ENV['app_key']
@@ -9,21 +8,12 @@ class OxfordService
     end
   end
 
-  def get_word
+  def validate_word(word)
     response = @conn.get("inflections/en/#{word}")
-    if response.body.include?("404")
-      "#{word} is not a valid word"
+    if response.status == 404
+      return false
     else
-      b = JSON.parse(response.body, symbolize_names: true)
-      "#{word} is a valid word and its root form is #{b[:results].first[:lexicalEntries].first[:inflectionOf].first[:text]}"
-    end
-  end
-
-  def is_valid?
-    if self.get_word.include?("404")
-      false
-    else
-      true
+      JSON.parse(response.body, symbolize_names: true)
     end
   end
 

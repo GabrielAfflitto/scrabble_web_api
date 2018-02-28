@@ -1,7 +1,7 @@
 class SearchController < ApplicationController
 
   def index
-    @search = OxfordService.new(params[:q])
+    @word = Word.new(params[:q])
   end
 
 end
