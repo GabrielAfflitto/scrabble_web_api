@@ -7,6 +7,6 @@ describe "Plays API" do
     play_params = {user_id: "1", word: "at"}
     post "/api/v1/games/#{game.id}/plays", params: {play: play_params}
 
-    expect(response.status).to eq(204)
+    expect(response.status).to eq(200)
   end
 end
